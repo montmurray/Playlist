@@ -20,12 +20,11 @@ struct ContentView: View {
     @State private var playing = false
     @State private var looping = false
     var body: some View {
-        //background
         ZStack {
-            Rectangle()
-                .fill(LinearGradient(colors: [.gray, .black], startPoint: .top, endPoint: .bottom)
-                )
-                .frame(width: 450, height: 900)
+            Rectangle() //background
+                .fill(LinearGradient(colors: background() //color function
+                                     , startPoint: .top, endPoint: .bottom))
+                .ignoresSafeArea(.all)
             VStack {
                 Image(albums)
                     .resizable()
@@ -33,15 +32,17 @@ struct ContentView: View {
                     .padding()
                 Text(tracks)
                     .font(.largeTitle)
-                    .multilineTextAlignment(.leading)
+                    .multilineTextAlignment(.center)
                     .bold()
                     .padding(5)
+                    .foregroundStyle(.white)
                 Text(artists)
                     .font(.title)
-            // bar, slider function.
-            
-            
-            // buttons
+                    .foregroundStyle(.white)
+                
+                // bar, slider function.
+                
+                // buttons
                 HStack{
                     Button(action: { shuffle()
                     }) {
@@ -86,68 +87,77 @@ struct ContentView: View {
                             .padding()
                     }
                 }
+                Spacer()
             }
         }
-        Spacer()
-        Spacer()
     }
-    //setting button functions
-    func update() {
-        //switch variables, uses case statements to update the song and strings attached currently displayed.
-        switch albums {
-        case "Placeholder 1":
-            artists = "The Smashing Pumpkins"
-            tracks = "Bullet with Butterfly Wings"
-        case "Placeholder 2":
-            artists = "Depeche Mode"
-            tracks = "Enjoy the Silence"
-        case "Placeholder 3":
-            artists = "New Order"
-            tracks = "True Faith"
-        default:
-            artists = "Artist Name"
-            tracks = "Track Name"
+        //setting button functions
+        func update() {
+            //switch variables, uses case statements to update the song and strings attached currently displayed.
+            switch albums {
+            case "Placeholder 1":
+                artists = "The Smashing Pumpkins"
+                tracks = "Bullet with Butterfly Wings"
+            case "Placeholder 2":
+                artists = "Depeche Mode"
+                tracks = "Enjoy the Silence"
+            case "Placeholder 3":
+                artists = "New Order"
+                tracks = "True Faith"
+            default:
+                artists = "Artist Name"
+                tracks = "Track Name"
+            }
+        }
+        //play, utilizing the boolean toggle function.
+        func play() {
+            albums = songList[index].0
+            update()
+            playing.toggle()
+        }
+        //shuffle, utilizing the shuffle functions
+        func shuffle() {
+            songList.shuffle()
+            albums = songList[index].0
+            update()
+        }
+        // skip
+        func skip() {
+            index += 1
+            if index > 2 { //change this when all songs are added.
+                index = 0
+            }
+            albums = songList[index].0
+            play()
+            update()
+        }
+        //previous, same as above.
+        func previous() {
+            index -= 1
+            if index > 2 || index < 0 { //change this when all songs are added.
+                index = 0
+            }
+            albums = songList[index].0
+            update()
+            play()
+            update()
+        }
+        //looping, toggle function, will revise when audio is added.
+        func loop() {
+            looping.toggle()
+        }
+        func background() -> [Color] { //changes background color, made with AI/Youtube assistance.
+            if albums == "Placeholder 1"{
+                return [.indigo, .black]
+            } else if albums == "Placeholder 2"{
+                return [.red, .black]
+            } else if albums == "Placeholder 3"{
+                return [.white, .black]
+            } else {
+                return [.gray, .black]
+            }
         }
     }
-    //play, utilizing the boolean toggle function.
-    func play() {
-        albums = songList[index].0
-        update()
-        playing.toggle()
+    #Preview {
+        ContentView()
     }
-    //shuffle, utilizing the shuffle functions
-    func shuffle() {
-        songList.shuffle()
-        albums = songList[index].0
-        update()
-    }
-    // skip
-    func skip() {
-        index += 1
-        if index > 2 { //change this when all songs are added.
-            index = 0
-        }
-        albums = songList[index].0
-        play()
-        update()
-    }
-    //previous, same as above.
-    func previous() {
-        index -= 1
-        if index > 2 || index < 0 { //change this when all songs are added.
-            index = 0
-        }
-        albums = songList[index].0
-        update()
-        play()
-        update()
-    }
-    //looping, toggle function, will revise when audio is added.
-    func loop() {
-        looping.toggle()
-    }
-}
-
-#Preview {
-    ContentView()
-}
