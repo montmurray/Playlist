@@ -26,6 +26,7 @@ struct ContentView: View {
                                      , startPoint: .top, endPoint: .bottom))
                 .ignoresSafeArea(.all)
             VStack {
+                Spacer(minLength: 0)
                 Image(albums)
                     .resizable()
                     .frame(width: 300, height: 300)
@@ -50,12 +51,14 @@ struct ContentView: View {
                             .resizable()
                             .frame(width: 25, height: 30)
                             .padding()
+                            .colorInvert()
                     }
                     Button(action: { previous()
                     }) {
                         Image("Previous")
                             .resizable()
                             .frame(width: 50, height: 50)
+                            .colorInvert()
                     }
                     //Play and Pause, using sound modifier to play song names.
                     Button(action: { play()
@@ -65,12 +68,14 @@ struct ContentView: View {
                                 .resizable()
                                 .frame(width: 60, height: 60)
                                 .padding()
+                                .colorInvert()
                             
                         } else {
                             Image("Pause")
                                 .resizable()
                                 .frame(width: 60, height: 60)
                                 .padding()
+                                .colorInvert()
                         }
                     }
                     Button(action: { skip()
@@ -78,6 +83,7 @@ struct ContentView: View {
                         Image("Skip")
                             .resizable()
                             .frame(width: 50, height: 50)
+                            .colorInvert()
                     }
                     Button(action: {
                     }) {
@@ -85,9 +91,11 @@ struct ContentView: View {
                             .resizable()
                             .frame(width: 25, height: 30)
                             .padding()
+                            .colorInvert()
                     }
                 }
-                Spacer()
+                Spacer(minLength: 2)
+                Spacer(minLength: 2)
             }
         }
     }
