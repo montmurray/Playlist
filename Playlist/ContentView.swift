@@ -187,6 +187,7 @@ struct ContentView: View {
         audioPlayer = nil
         playAudio()
         playing = true
+        playing.toggle()
     }
     //previous, same as above.
     func previous() {
@@ -200,6 +201,7 @@ struct ContentView: View {
         audioPlayer = nil
         playAudio()
         playing = true
+        playing.toggle()
     }
     //looping, toggle function, will revise when audio is added.
     //after futher determination, this can only be cosmetic.
@@ -211,7 +213,7 @@ struct ContentView: View {
             return [.indigo, .black]
         } else if albums == "Violator" || albums == "VOCA COLLECTION" {
             return [.red, .black]
-        } else if albums == "Substance" {
+        } else if albums == "Substance" || albums == "Unknown Pleasures" {
             return [.white, .black]
         } else if albums == "The Head on the Door"{
                 return [.blue, .black]
