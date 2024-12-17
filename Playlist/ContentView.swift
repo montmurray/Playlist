@@ -158,6 +158,11 @@ struct ContentView: View {
             audioPlayer?.play()
         }
         playing.toggle()
+        if audioPlayer == nil {
+            playAudio()
+            audioPlayer?.play()
+            playing = true
+        }
     }
     //shuffle, utilizing the shuffle functions
     func shuffle() {
@@ -178,8 +183,10 @@ struct ContentView: View {
         }
         albums = songList[index].0
         update()
+        audioPlayer?.stop()
+        audioPlayer = nil
         playAudio()
-        play()
+        playing = true
     }
     //previous, same as above.
     func previous() {
@@ -189,8 +196,10 @@ struct ContentView: View {
         }
         albums = songList[index].0
         update()
+        audioPlayer?.stop()
+        audioPlayer = nil
         playAudio()
-        play()
+        playing = true
     }
     //looping, toggle function, will revise when audio is added.
     //after futher determination, this can only be cosmetic.
