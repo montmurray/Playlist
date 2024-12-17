@@ -17,7 +17,7 @@ struct ContentView: View {
     @State private var tracks = "Track Name"
     //album list array, base for the program.
     @State private var songList = [
-        ("Placeholder 1", "bwbw"), ("Placeholder 2", "enjoy the silence"), ("Placeholder 3", "true faith")
+        ("Melon Collie", "bwbw"), ("Violator", "enjoy the silence"), ("Substance", "true faith")
     ]
     @State private var playing = false
     @State private var looping = false
@@ -110,13 +110,13 @@ struct ContentView: View {
     func update() {
         //switch variables, uses case statements to update the song and strings attached currently displayed.
         switch albums {
-        case "Placeholder 1":
+        case "Melon Collie":
             artists = "The Smashing Pumpkins"
             tracks = "Bullet with Butterfly Wings"
-        case "Placeholder 2":
+        case "Violator":
             artists = "Depeche Mode"
             tracks = "Enjoy the Silence"
-        case "Placeholder 3":
+        case "Substance":
             artists = "New Order"
             tracks = "True Faith"
         default:
@@ -145,10 +145,6 @@ struct ContentView: View {
             audioPlayer?.play()
         }
         playing.toggle()
-        if audioPlayer == nil {
-            playing = true
-        }
-        
     }
     //shuffle, utilizing the shuffle functions
     func shuffle() {
@@ -189,11 +185,11 @@ struct ContentView: View {
         looping.toggle()
     }
     func background() -> [Color] { //changes background color, made with AI/Youtube assistance.
-        if albums == "Placeholder 1"{
+        if albums == "Melon Collie"{
             return [.indigo, .black]
-        } else if albums == "Placeholder 2"{
+        } else if albums == "Violator"{
             return [.red, .black]
-        } else if albums == "Placeholder 3"{
+        } else if albums == "Substance"{
             return [.white, .black]
         } else {
             return [.gray, .black]
