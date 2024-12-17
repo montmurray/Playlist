@@ -5,8 +5,6 @@
 //  Created by Tessa Murray on 12/3/24.
 //
 
-// notes to self: add more tracks, add actual music.
-
 import SwiftUI
 import AVFoundation //for audio
 
@@ -170,32 +168,32 @@ struct ContentView: View {
         audioPlayer?.stop()
         audioPlayer = nil
         playAudio()
-        playing.toggle()
+        playing = true
     }
     // skip
     func skip() {
         index += 1
-        if index > songList.count { //change this when all songs are added.
+        if index >= songList.count {
             index = 0
         }
         albums = songList[index].0
-        play()
         update()
         playAudio()
+        play()
     }
     //previous, same as above.
     func previous() {
         index -= 1
-        if index > songList.count || index < 0 { //change this when all songs are added.
+        if index >= songList.count || index < 0 {
             index = 0
         }
         albums = songList[index].0
         update()
-        play()
-        update()
         playAudio()
+        play()
     }
     //looping, toggle function, will revise when audio is added.
+    //after futher determination, this can only be cosmetic.
     func loop() {
         looping.toggle()
     }
