@@ -19,7 +19,7 @@ struct ContentView: View {
     ]
     @State private var playing = false
     @State private var looping = false
-    // audio player, via youtube assistance
+    // audio player, using AVFoundation (found via hacking with swift, reddit, and stack overflow).
     @State private var audioPlayer: AVAudioPlayer?
     var body: some View {
         ZStack {
@@ -42,9 +42,6 @@ struct ContentView: View {
                 Text(artists)
                     .font(.title)
                     .foregroundStyle(.white)
-                
-                // bar, slider function.
-                
                 // buttons
                 HStack{
                     Button(action: { shuffle()
@@ -107,6 +104,7 @@ struct ContentView: View {
     //setting button functions
     func update() {
         //switch variables, uses case statements to update the song and strings attached currently displayed.
+        // found this via hacking with swift.
         switch albums {
         case "Melon Collie":
             artists = "The Smashing Pumpkins"
@@ -138,6 +136,7 @@ struct ContentView: View {
         }
     }
     func playAudio(){ // found via stack overflow, youtube, hacking with swift, and ai assistance
+        // looked up AVFoundation use on hacking with swift and youtube, referred to ai and stack overflow for clarification/simplier methods.
         let audio = songList[index].1
         if let url = Bundle.main.url(forResource: audio, withExtension: "mp3") {
             do {
@@ -209,7 +208,7 @@ struct ContentView: View {
     func loop() {
         looping.toggle()
     }
-    func background() -> [Color] { //changes background color, made with AI/Youtube assistance.
+    func background() -> [Color] { //changes background color, made with AI/Youtube assistance. (ai: correct parameters for background output).
         if albums == "Melon Collie"{
             return [.indigo, .black]
         } else if albums == "Violator" || albums == "VOCA COLLECTION" {
