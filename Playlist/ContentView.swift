@@ -5,8 +5,10 @@
 //  Created by Tessa Murray on 12/3/24.
 //
 
+// notes to self: add more tracks, add actual music.
 
 import SwiftUI
+import AVFoundation //for audio
 
 struct ContentView: View {
     @State private var index = 0
@@ -15,10 +17,12 @@ struct ContentView: View {
     @State private var tracks = "Track Name"
     //album list array, base for the program.
     @State private var songList = [
-        ("Placeholder 1", "song1"), ("Placeholder 2", "song2"), ("Placeholder 3", "song3")
+        ("Placeholder 1", "bwbw"), ("Placeholder 2", "enjoy the silence"), ("Placeholder 3", "true faith")
     ]
     @State private var playing = false
     @State private var looping = false
+    // audio player, via youtube assistance
+    @State private var audioPlayer: AVAudioPlayer?
     var body: some View {
         ZStack {
             Rectangle() //background
@@ -98,74 +102,97 @@ struct ContentView: View {
                 Spacer(minLength: 2)
             }
         }
+        .onAppear{
+            playAudio()
+        }
     }
-        //setting button functions
-        func update() {
-            //switch variables, uses case statements to update the song and strings attached currently displayed.
-            switch albums {
-            case "Placeholder 1":
-                artists = "The Smashing Pumpkins"
-                tracks = "Bullet with Butterfly Wings"
-            case "Placeholder 2":
-                artists = "Depeche Mode"
-                tracks = "Enjoy the Silence"
-            case "Placeholder 3":
-                artists = "New Order"
-                tracks = "True Faith"
-            default:
-                artists = "Artist Name"
-                tracks = "Track Name"
-            }
+    //setting button functions
+    func update() {
+        //switch variables, uses case statements to update the song and strings attached currently displayed.
+        switch albums {
+        case "Placeholder 1":
+            artists = "The Smashing Pumpkins"
+            tracks = "Bullet with Butterfly Wings"
+        case "Placeholder 2":
+            artists = "Depeche Mode"
+            tracks = "Enjoy the Silence"
+        case "Placeholder 3":
+            artists = "New Order"
+            tracks = "True Faith"
+        default:
+            artists = "Artist Name"
+            tracks = "Track Name"
         }
-        //play, utilizing the boolean toggle function.
-        func play() {
-            albums = songList[index].0
-            update()
-            playing.toggle()
-        }
-        //shuffle, utilizing the shuffle functions
-        func shuffle() {
-            songList.shuffle()
-            albums = songList[index].0
-            update()
-        }
-        // skip
-        func skip() {
-            index += 1
-            if index > 2 { //change this when all songs are added.
-                index = 0
-            }
-            albums = songList[index].0
-            play()
-            update()
-        }
-        //previous, same as above.
-        func previous() {
-            index -= 1
-            if index > 2 || index < 0 { //change this when all songs are added.
-                index = 0
-            }
-            albums = songList[index].0
-            update()
-            play()
-            update()
-        }
-        //looping, toggle function, will revise when audio is added.
-        func loop() {
-            looping.toggle()
-        }
-        func background() -> [Color] { //changes background color, made with AI/Youtube assistance.
-            if albums == "Placeholder 1"{
-                return [.indigo, .black]
-            } else if albums == "Placeholder 2"{
-                return [.red, .black]
-            } else if albums == "Placeholder 3"{
-                return [.white, .black]
-            } else {
-                return [.gray, .black]
+    }
+    func playAudio(){
+        let audio = songList[index].1
+        if let url = Bundle.main.url(forResource: audio, withExtension: "mp3") {
+            do {
+                audioPlayer = try AVAudioPlayer(contentsOf: url)
+                audioPlayer?.prepareToPlay()
+            } catch {
+                print("Error")
             }
         }
     }
-    #Preview {
-        ContentView()
+    //play, utilizing the boolean toggle function.
+    func play() {
+        albums = songList[index].0
+        update()
+        if playing {
+            audioPlayer?.pause()
+        } else {
+            audioPlayer?.play()
+        }
+        playing.toggle()
+        
     }
+    //shuffle, utilizing the shuffle functions
+    func shuffle() {
+        songList.shuffle()
+        albums = songList[index].0
+        update()
+        playAudio()
+    }
+    // skip
+    func skip() {
+        index += 1
+        if index > 2 { //change this when all songs are added.
+            index = 0
+        }
+        albums = songList[index].0
+        play()
+        update()
+        playAudio()
+    }
+    //previous, same as above.
+    func previous() {
+        index -= 1
+        if index > 2 || index < 0 { //change this when all songs are added.
+            index = 0
+        }
+        albums = songList[index].0
+        update()
+        play()
+        update()
+        playAudio()
+    }
+    //looping, toggle function, will revise when audio is added.
+    func loop() {
+        looping.toggle()
+    }
+    func background() -> [Color] { //changes background color, made with AI/Youtube assistance.
+        if albums == "Placeholder 1"{
+            return [.indigo, .black]
+        } else if albums == "Placeholder 2"{
+            return [.red, .black]
+        } else if albums == "Placeholder 3"{
+            return [.white, .black]
+        } else {
+            return [.gray, .black]
+        }
+    }
+}
+#Preview {
+    ContentView()
+}

@@ -6,7 +6,16 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		5DE832F02D10F9AD0046B37B /* bwbw.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5DE832EC2D10F9AD0046B37B /* bwbw.mp3 */; };
+		5DE832F12D10F9AD0046B37B /* true faith.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5DE832EE2D10F9AD0046B37B /* true faith.mp3 */; };
+		5DE832F22D10F9AD0046B37B /* enjoy the silence.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5DE832ED2D10F9AD0046B37B /* enjoy the silence.mp3 */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
+		5DE832EC2D10F9AD0046B37B /* bwbw.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bwbw.mp3; sourceTree = "<group>"; };
+		5DE832ED2D10F9AD0046B37B /* enjoy the silence.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "enjoy the silence.mp3"; sourceTree = "<group>"; };
+		5DE832EE2D10F9AD0046B37B /* true faith.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "true faith.mp3"; sourceTree = "<group>"; };
 		5DE9CF252CFF5FF300E2DFDD /* Playlist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Playlist.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -29,9 +38,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5DE832EF2D10F9AD0046B37B /* Songs */ = {
+			isa = PBXGroup;
+			children = (
+				5DE832EC2D10F9AD0046B37B /* bwbw.mp3 */,
+				5DE832ED2D10F9AD0046B37B /* enjoy the silence.mp3 */,
+				5DE832EE2D10F9AD0046B37B /* true faith.mp3 */,
+			);
+			path = Songs;
+			sourceTree = "<group>";
+		};
 		5DE9CF1C2CFF5FF200E2DFDD = {
 			isa = PBXGroup;
 			children = (
+				5DE832EF2D10F9AD0046B37B /* Songs */,
 				5DE9CF272CFF5FF300E2DFDD /* Playlist */,
 				5DE9CF262CFF5FF300E2DFDD /* Products */,
 			);
@@ -109,6 +129,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5DE832F02D10F9AD0046B37B /* bwbw.mp3 in Resources */,
+				5DE832F12D10F9AD0046B37B /* true faith.mp3 in Resources */,
+				5DE832F22D10F9AD0046B37B /* enjoy the silence.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
