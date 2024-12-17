@@ -145,14 +145,21 @@ struct ContentView: View {
             audioPlayer?.play()
         }
         playing.toggle()
+        if audioPlayer == nil {
+            playing = true
+        }
         
     }
     //shuffle, utilizing the shuffle functions
     func shuffle() {
         songList.shuffle()
+        index = 0
         albums = songList[index].0
         update()
+        audioPlayer?.stop()
+        audioPlayer = nil
         playAudio()
+        playing.toggle()
     }
     // skip
     func skip() {
