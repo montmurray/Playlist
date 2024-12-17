@@ -174,6 +174,7 @@ struct ContentView: View {
         audioPlayer = nil
         playAudio()
         playing = true
+        playing.toggle()
     }
     // skip
     func skip() {
